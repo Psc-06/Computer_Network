@@ -1,0 +1,745 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Chapter-2 Network infrastructure</title>
+        <meta charset='utf-8'/>
+        <style>
+ .ͼ1.cm-focused {outline: 1px dotted #212121;}
+.ͼ1 {position: relative !important; box-sizing: border-box; display: flex !important; flex-direction: column;}
+.ͼ1 .cm-scroller {display: flex !important; align-items: flex-start !important; font-family: monospace; line-height: 1.4; height: 100%; overflow-x: auto; position: relative; z-index: 0; overflow-anchor: none;}
+.ͼ1 .cm-content[contenteditable=true] {-webkit-user-modify: read-write-plaintext-only;}
+.ͼ1 .cm-content {margin: 0; flex-grow: 2; flex-shrink: 0; display: block; white-space: pre; word-wrap: normal; box-sizing: border-box; min-height: 100%; padding: 4px 0; outline: none;}
+.ͼ1 .cm-lineWrapping {white-space: pre-wrap; white-space: break-spaces; word-break: break-word; overflow-wrap: anywhere; flex-shrink: 1;}
+.ͼ2 .cm-content {caret-color: black;}
+.ͼ3 .cm-content {caret-color: white;}
+.ͼ1 .cm-line {display: block; padding: 0 2px 0 6px;}
+.ͼ1 .cm-layer > * {position: absolute;}
+.ͼ1 .cm-layer {position: absolute; left: 0; top: 0; contain: size style;}
+.ͼ2 .cm-selectionBackground {background: #d9d9d9;}
+.ͼ3 .cm-selectionBackground {background: #222;}
+.ͼ2.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {background: #d7d4f0;}
+.ͼ3.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {background: #233;}
+.ͼ1 .cm-cursorLayer {pointer-events: none;}
+.ͼ1.cm-focused > .cm-scroller > .cm-cursorLayer {animation: steps(1) cm-blink 1.2s infinite;}
+@keyframes cm-blink {50% {opacity: 0;}}
+@keyframes cm-blink2 {50% {opacity: 0;}}
+.ͼ1 .cm-cursor, .ͼ1 .cm-dropCursor {border-left: 1.2px solid black; margin-left: -0.6px; pointer-events: none;}
+.ͼ1 .cm-cursor {display: none;}
+.ͼ3 .cm-cursor {border-left-color: #ddd;}
+.ͼ1 .cm-dropCursor {position: absolute;}
+.ͼ1.cm-focused > .cm-scroller > .cm-cursorLayer .cm-cursor {display: block;}
+.ͼ1 .cm-iso {unicode-bidi: isolate;}
+.ͼ1 .cm-announced {position: fixed; top: -10000px;}
+@media print {.ͼ1 .cm-announced {display: none;}}
+.ͼ2 .cm-activeLine {background-color: #cceeff44;}
+.ͼ3 .cm-activeLine {background-color: #99eeff33;}
+.ͼ2 .cm-specialChar {color: red;}
+.ͼ3 .cm-specialChar {color: #f78;}
+.ͼ1 .cm-gutters {flex-shrink: 0; display: flex; height: 100%; box-sizing: border-box; z-index: 200;}
+.ͼ1 .cm-gutters-before {inset-inline-start: 0;}
+.ͼ1 .cm-gutters-after {inset-inline-end: 0;}
+.ͼ2 .cm-gutters.cm-gutters-before {border-right-width: 1px;}
+.ͼ2 .cm-gutters.cm-gutters-after {border-left-width: 1px;}
+.ͼ2 .cm-gutters {background-color: #f5f5f5; color: #6c6c6c; border: 0px solid #ddd;}
+.ͼ3 .cm-gutters {background-color: #333338; color: #ccc;}
+.ͼ1 .cm-gutter {display: flex !important; flex-direction: column; flex-shrink: 0; box-sizing: border-box; min-height: 100%; overflow: hidden;}
+.ͼ1 .cm-gutterElement {box-sizing: border-box;}
+.ͼ1 .cm-lineNumbers .cm-gutterElement {padding: 0 3px 0 5px; min-width: 20px; text-align: right; white-space: nowrap;}
+.ͼ2 .cm-activeLineGutter {background-color: #e2f2ff;}
+.ͼ3 .cm-activeLineGutter {background-color: #222227;}
+.ͼ1 .cm-panels {box-sizing: border-box; position: sticky; left: 0; right: 0; z-index: 300;}
+.ͼ2 .cm-panels {background-color: #f5f5f5; color: black;}
+.ͼ2 .cm-panels-top {border-bottom: 1px solid #ddd;}
+.ͼ2 .cm-panels-bottom {border-top: 1px solid #ddd;}
+.ͼ3 .cm-panels {background-color: #333338; color: white;}
+.ͼ1 .cm-dialog label {font-size: 80%;}
+.ͼ1 .cm-dialog {padding: 2px 19px 4px 6px; position: relative;}
+.ͼ1 .cm-dialog-close {position: absolute; top: 3px; right: 4px; background-color: inherit; border: none; font: inherit; font-size: 14px; padding: 0;}
+.ͼ1 .cm-tab {display: inline-block; overflow: hidden; vertical-align: bottom;}
+.ͼ1 .cm-widgetBuffer {vertical-align: text-top; height: 1em; width: 0; display: inline;}
+.ͼ1 .cm-placeholder {color: #888; display: inline-block; vertical-align: top; user-select: none;}
+.ͼ1 .cm-highlightSpace {background-image: radial-gradient(circle at 50% 55%, #aaa 20%, transparent 5%); background-position: center;}
+.ͼ1 .cm-highlightTab {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20"><path stroke="%23888" stroke-width="1" fill="none" d="M1 10H196L190 5M190 15L196 10M197 4L197 16"/></svg>'); background-size: auto 100%; background-position: right 90%; background-repeat: no-repeat;}
+.ͼ1 .cm-trailingSpace {background-color: #ff332255;}
+.ͼ1 .cm-button {vertical-align: middle; color: inherit; font-size: 70%; padding: .2em 1em; border-radius: 1px;}
+.ͼ2 .cm-button:active {background-image: linear-gradient(#b4b4b4, #d0d3d6);}
+.ͼ2 .cm-button {background-image: linear-gradient(#eff1f5, #d9d9df); border: 1px solid #888;}
+.ͼ3 .cm-button:active {background-image: linear-gradient(#111, #333);}
+.ͼ3 .cm-button {background-image: linear-gradient(#393939, #111); border: 1px solid #888;}
+.ͼ1 .cm-textfield {vertical-align: middle; color: inherit; font-size: 70%; border: 1px solid silver; padding: .2em .5em;}
+.ͼ2 .cm-textfield {background-color: white;}
+.ͼ3 .cm-textfield {border: 1px solid #555; background-color: inherit;}
+.ͼ1 .cm-foldPlaceholder {background-color: #eee; border: 1px solid #ddd; color: #888; border-radius: .2em; margin: 0 1px; padding: 0 1px; cursor: pointer;}
+.ͼ1 .cm-foldGutter span {padding: 0 1px; cursor: pointer;}
+ 
+.pandoc-plugin-error {
+    color: red;
+}
+ 
+:root
+{
+    --dark0_x:  46,52,64; /* #2e3440 */
+    --dark0:    rgb(var(--dark0_x));
+    --dark1_x:  59,66,82; /* #3b4252 */
+    --dark1:    rgb(var(--dark1_x));
+    --dark2_x:  67,76,94; /* #434c5e */
+    --dark2:    rgb(var(--dark2_x));
+    --dark3_x:  76,86,106; /* #4c566a */
+    --dark3:    rgb(var(--dark3_x));
+
+    --light0_x: 216,222,233; /* #d8dee9 */
+    --light0:   rgb(var(--light0_x));
+    --light1_x: 229,233,240; /* #e5e9f0 */
+    --light1:   rgb(var(--light1_x));
+    --light2_x: 236,239,244; /* #eceff4 */
+    --light2:   rgb(var(--light2_x));
+    --light3_x: 255,255,255; /* #ffffff */
+    --light3:   rgb(var(--light3_x));
+
+    --frost0_x: 143,188,187; /* #8fbcbb */
+    --frost0:   rgb(var(--frost0_x));
+    --frost1_x: 136,192,208; /* #88c0d0 */
+    --frost1:   rgb(var(--frost1_x));
+    --frost2_x: 129,161,193; /* #81a1c1 */
+    --frost2:   rgb(var(--frost2_x));
+    --frost3_x: 94,129,172; /* #5e81ac */
+    --frost3:   rgb(var(--frost3_x));
+
+    --red_x:    191,97,106; /* #bf616a */
+    --red:      rgb(var(--red_x));
+    --orange_x: 208,135,112; /* #d08770 */
+    --orange:   rgb(var(--orange_x));
+    --yellow_x: 235,203,139; /* #ebcb8b */
+    --yellow:   rgb(var(--yellow_x));
+    --green_x:  163,190,140; /* #a3be8c */
+    --green:    rgb(var(--green_x));
+    --purple_x: 180,142,173; /* #b48ead */
+    --purple:   rgb(var(--purple_x));
+}
+
+body
+{
+    --accent-h: 354; /* --red #bf616a */
+    --accent-s: 42%;
+    --accent-l: 56%;
+
+    --link-decoration:                none;
+    --link-decoration-hover:          none;
+    --link-external-decoration:       none;
+    --link-external-decoration-hover: none;
+
+    --tag-decoration:                 none;
+    --tag-decoration-hover:           underline;
+    --tag-padding-x:                  .5em;
+    --tag-padding-y:                  .2em;
+    --tag-radius:                     .5em;
+
+    --tab-font-weight:                600;
+    --bold-weight:                    600;
+
+    --checkbox-radius:                0;
+
+    /* --list-indent:                    2em; */
+
+    --embed-border-left: 6px double var(--interactive-accent);
+}
+
+.theme-dark
+{
+    --color-red-rgb:                 var(--red_x);
+    --color-red:                     var(--red);
+    --color-purple-rgb:              var(--purple_x);
+    --color-purple:                  var(--purple);
+    --color-green-rgb:               var(--green_x);
+    --color-green:                   var(--green);
+    --color-cyan-rgb:                var(--frost1_x);
+    --color-cyan:                    var(--frost1);
+    --color-blue-rgb:                var(--frost3_x);
+    --color-blue:                    var(--frost3);
+    --color-yellow-rgb:              var(--yellow_x);
+    --color-yellow:                  var(--yellow);
+    --color-orange-rgb:              var(--orange_x);
+    --color-orange:                  var(--orange);
+    /* --color-pink:                    var(--purple); */
+
+    --background-primary:            var(--dark0);
+    --background-primary-alt:        var(--dark0);
+    --background-secondary:          var(--dark1);
+    --background-secondary-alt:      var(--dark2);
+    --background-modifier-border:    var(--dark2);
+
+    --cursor-line-background:        rgba(var(--red_x), 0.2);
+
+    --text-normal:                   var(--light2);
+    --text-faint:                    var(--light0);
+    --text-muted:                    var(--light1);
+
+    --link-url:                      var(--purple);
+
+    --h1-color:                      var(--red);
+    --h2-color:                      var(--yellow);
+    --h3-color:                      var(--green);
+    --h4-color:                      var(--purple);
+    --h5-color:                      var(--frost0);
+    --h6-color:                      var(--frost2);
+
+    --text-highlight-bg:             var(--frost1);
+    --text-highlight-fg:             var(--dark0);
+
+    --text-accent:                   var(--orange);
+    --text-accent-hover:             var(--frost2);
+
+    --tag-color:                     var(--frost0);
+    --tag-background:                var(--dark2);
+    --tag-background-hover:          var(--dark1);
+
+    --titlebar-text-color-focused:   var(--red);
+
+    --inline-title-color:            var(--yellow);
+
+    --bold-color:                    var(--yellow);
+    --italic-color:                  var(--yellow);
+
+    --checkbox-color:                var(--frost0);
+    --checkbox-color-hover:          var(--frost0);
+    --checkbox-border-color:         var(--frost0);
+    --checkbox-border-color-hover:   var(--frost0);
+    --checklist-done-color:          rgba(var(--light2_x), 0.5);
+
+    --table-header-background:       hsl(220, 16%, 16%);
+    --table-header-background-hover: var(--dark3);
+    --table-row-even-background:     hsl(220, 16%, 20%);
+    --table-row-odd-background:      hsl(220, 16%, 24%);
+    --table-row-background-hover:    var(--dark3);
+
+    --text-selection:                rgba(var(--red_x), 0.6);
+    --flashing-background:           rgba(var(--red_x), 0.3);
+
+    --code-normal:                   var(--frost1);
+    --code-background:               var(--dark1);
+
+    --mermaid-note:                  var(--frost3);
+    --mermaid-loopline:              var(--frost1);
+    --mermaid-exclude:               var(--dark3);
+    --mermaid-seqnum:                var(--dark0);
+
+    --icon-color-hover:              var(--red);
+    --icon-color-focused:            var(--frost2);
+
+    --nav-item-color-hover:          var(--red);
+    --nav-item-color-active:         var(--frost2);
+    --nav-file-tag:                  rgba(var(--yellow_x), 0.9);
+
+    --graph-line:                    var(--dark3);
+    --graph-node:                    var(--light3);
+    --graph-node-tag:                var(--red);
+    --graph-node-attachment:         var(--green);
+
+    --calendar-hover:                var(--red);
+    --calendar-background-hover:     var(--dark3);
+    --calendar-week:                 var(--yellow);
+    --calendar-today:                var(--yellow);
+
+    --dataview-key:                  var(--text-faint);
+    --dataview-key-background:       rgba(var(--frost2_x), 0.3);
+    --dataview-value:                var(--text-faint);
+    --dataview-value-background:     rgba(var(--red_x), 0.3);
+
+    --tab-text-color-focused-active:         var(--frost2);
+    --tab-text-color-focused-active-current: var(--red);
+}
+
+.theme-light
+{
+    --color-red-rgb:                 var(--red_x);
+    --color-red:                     var(--red);
+    --color-purple-rgb:              var(--purple_x);
+    --color-purple:                  var(--purple);
+    --color-green-rgb:               var(--green_x);
+    --color-green:                   var(--green);
+    --color-cyan-rgb:                var(--frost1_x);
+    --color-cyan:                    var(--frost1);
+    --color-blue-rgb:                var(--frost3_x);
+    --color-blue:                    var(--frost3);
+    --color-yellow-rgb:              var(--yellow_x);
+    --color-yellow:                  var(--yellow);
+    --color-orange-rgb:              var(--orange_x);
+    --color-orange:                  var(--orange);
+    /* --color-pink:                    var(--purple); */
+
+    --background-primary:            var(--light3);
+    --background-primary-alt:        var(--light3);
+    --background-secondary:          var(--light2);
+    --background-secondary-alt:      var(--light1);
+    --background-modifier-border:    var(--light1);
+
+    --cursor-line-background:        rgba(var(--red_x), 0.1);
+
+    --text-normal:                   var(--dark2);
+    --text-faint:                    var(--dark0);
+    --text-muted:                    var(--dark1);
+
+    --link-url:                      var(--purple);
+
+    --h1-color:                      var(--red);
+    --h2-color:                      var(--yellow);
+    --h3-color:                      var(--green);
+    --h4-color:                      var(--purple);
+    --h5-color:                      var(--frost0);
+    --h6-color:                      var(--frost2);
+
+    --text-highlight-bg:             var(--yellow);
+    --text-highlight-fg:             var(--dark0);
+
+    --text-accent:                   var(--orange);
+    --text-accent-hover:             var(--frost2);
+
+    --tag-color:                     var(--dark3);
+    --tag-background:                var(--light1);
+    --tag-background-hover:          var(--light0);
+
+    --titlebar-text-color-focused:   var(--red);
+
+    --inline-title-color:            var(--yellow);
+
+    --bold-color:                    var(--green);
+    --italic-color:                  var(--green);
+
+    --checkbox-color:                var(--frost2);
+    --checkbox-color-hover:          var(--frost2);
+    --checkbox-border-color:         var(--frost2);
+    --checkbox-border-color-hover:   var(--frost2);
+    --checklist-done-color:          rgba(var(--dark2_x), 0.4);
+
+    --table-header-background:       rgba(var(--light2_x), 0.2);
+    --table-header-background-hover: var(--frost2);
+    --table-row-even-background:     rgba(var(--light2_x), 0.4);
+    --table-row-odd-background:      rgba(var(--light2_x), 0.8);
+    --table-row-background-hover:    var(--frost2);
+
+    --text-selection:                rgba(var(--red_x), 0.6);
+    --flashing-background:           rgba(var(--red_x), 0.3);
+
+    --code-normal:                   var(--frost1);
+    --code-background:               var(--light2);
+
+    --mermaid-note:                  var(--frost0);
+    --mermaid-loopline:              var(--frost1);
+    --mermaid-exclude:               var(--light0);
+    --mermaid-seqnum:                var(--light0);
+
+    --icon-color-hover:              var(--red);
+    --icon-color-focused:            var(--frost3);
+
+    --nav-item-color-hover:          var(--red);
+    --nav-item-color-active:         var(--frost2);
+    --nav-file-tag:                  rgba(var(--orange_x), 0.9);
+
+    --graph-line:                    var(--light0);
+    --graph-node:                    var(--dark3);
+    --graph-node-tag:                var(--red);
+    --graph-node-attachment:         var(--green);
+
+    --calendar-hover:                var(--red);
+    --calendar-background-hover:     var(--light0);
+    --calendar-week:                 var(--orange);
+    --calendar-today:                var(--orange);
+
+    --dataview-key:                  var(--text-faint);
+    --dataview-key-background:       rgba(var(--frost2_x), 0.3);
+    --dataview-value:                var(--text-faint);
+    --dataview-value-background:     rgba(var(--red_x), 0.3);
+
+    --tab-text-color-focused-active:         var(--frost2);
+    --tab-text-color-focused-active-current: var(--red);
+}
+
+table
+{
+    border: 1px solid var(--background-secondary) !important;
+    border-collapse: collapse;
+}
+
+thead
+{
+    border-bottom: 2px solid var(--background-modifier-border) !important;
+}
+  
+th
+{
+    font-weight: 600 !important;
+    border: 1px solid var(--background-secondary) !important;
+}
+
+td
+{
+    border-left: 1px solid var(--background-secondary) !important;
+    border-right: 1px solid var(--background-secondary) !important;
+    border-bottom: 1px solid var(--background-secondary) !important;
+}
+
+.markdown-rendered tbody tr:nth-child(even)
+{
+    background-color: var(--table-row-even-background) !important;
+}
+
+.markdown-rendered tbody tr:nth-child(odd)
+{
+    background-color: var(--table-row-odd-background) !important;
+}
+
+.markdown-rendered tbody tr:nth-child(even):hover,
+.markdown-rendered tbody tr:nth-child(odd):hover
+{
+    background-color: var(--table-row-background-hover) !important;
+}
+
+.markdown-rendered mark
+{
+    background-color: var(--text-highlight-bg);
+    color: var(--text-highlight-fg);
+}
+
+.markdown-rendered mark a
+{
+    color: var(--red) !important;
+    font-weight: 600;
+}
+
+.search-result-file-matched-text
+{
+    color: var(--text-highlight-fg) !important;
+}
+
+.cm-hashtag-begin:hover, .cm-hashtag-end:hover
+{
+    color: var(--text-accent);
+    /* background-color: var(--tag-background-hover); */
+    text-decoration: underline;
+}
+
+input[type=checkbox]
+{
+    border: 1px solid var(--checkbox-color);
+}
+
+input[type=checkbox]:checked
+{
+    background-color: var(--checkbox-color);
+    box-shadow: inset 0 0 0 2px var(--background-primary);
+}
+
+input[type=checkbox]:checked:after
+{
+    display: none;
+}
+
+code[class*="language-"],
+pre[class*="language-"]
+{
+    line-height: var(--line-height-tight) !important;
+}
+
+.cm-url
+{
+    color: var(--link-url) !important;
+}
+
+.cm-url:hover
+{
+    color: var(--text-accent-hover) !important;
+}
+
+/* Keep highlight/marks the same between viewer and editor. */
+.cm-highlight
+{
+    color: var(--text-highlight-fg) !important;
+}
+
+/* Keep inline code the same between viewer and editor. */
+.cm-inline-code
+{
+    border-radius: var(--radius-s);
+    font-size: var(--code-size);
+    padding: 0.1em 0.25em;
+}
+
+.cm-formatting-code + .cm-inline-code
+{
+    border-radius: 0;
+    padding: 0.1em 0;
+}
+
+.cm-formatting-code
+{
+    border-radius: var(--radius-s) 0 0 var(--radius-s);
+    padding: 0.1em 0 0.1em 0.25em;
+}
+
+.cm-inline-code + .cm-formatting-code
+{
+    border-radius: 0 var(--radius-s) var(--radius-s) 0;
+    padding: 0.1em 0.25em 0.1em 0;
+}
+
+.cm-line .cm-strong
+{
+    color: var(--bold-color) !important;
+}
+
+/*
+ * Keep list bullet padding the same between viewer and editor.
+ * This is annoying with the cursor in the editor as there is a gap.
+ */
+/*
+.cm-formatting-list
+{
+     padding-right: 4px !important;
+}
+*/
+
+/*
+ * Keep sub-list indenting the same between viewer and editor.
+ * This assumes --list-indent is default at 2em.
+ */
+/*
+.cm-indent 
+{
+    text-indent: 1em !important;
+}
+*/
+
+.mermaid .note
+{
+    fill: var(--mermaid-note) !important;
+}
+
+.mermaid .loopLine
+{
+    stroke: var(--mermaid-loopline) !important;
+}
+
+.mermaid .loopText>tspan,
+.mermaid .entityLabel
+{
+    fill: var(--red) !important;
+}
+
+.mermaid .exclude-range
+{
+    fill: var(--mermaid-exclude) !important;
+}
+
+.mermaid .sequenceNumber
+{
+    fill: var(--mermaid-seqnum) !important;
+}
+
+.calendar .week-num
+{
+    color: var(--calendar-week) !important;
+}
+
+.calendar .today
+{
+    color: var(--calendar-today) !important;
+}
+
+.calendar .week-num:hover,
+.calendar .day:hover
+{
+    color: var(--calendar-hover) !important;
+    background-color: var(--calendar-background-hover) !important;
+}
+
+.markdown-embed-title
+{
+    color: var(--yellow);
+    font-weight: 600 !important;
+}
+
+.cm-active
+{
+    background-color: var(--cursor-line-background) !important;
+}
+
+.nav-file-tag
+{
+    color: var(--nav-file-tag) !important;
+}
+
+.is-flashing
+{
+    background-color: var(--flashing-background) !important;
+}
+
+.dataview.inline-field-key
+{
+    border-top-left-radius: var(--radius-s);
+    border-bottom-left-radius: var(--radius-s);
+    padding-left: 4px;
+    font-family: var(--font-monospace);
+    font-size: var(--font-smaller);
+    color: var(--dataview-key) !important;
+    background-color: var(--dataview-key-background) !important;
+}
+
+.dataview.inline-field-value
+{
+    border-top-right-radius: var(--radius-s);
+    border-bottom-right-radius: var(--radius-s);
+    padding-right: 4px;
+    font-family: var(--font-monospace);
+    font-size: var(--font-smaller);
+    color: var(--dataview-value) !important;
+    background-color: var(--dataview-value-background) !important;
+}
+
+.suggestion-highlight
+{
+    color: var(--red);
+}
+
+undefined
+</style>
+    </head>
+    <body>
+<h4 data-heading="Infrastructure of a network consist of physical elements and that elements are :" dir="auto">Infrastructure of a network consist of physical elements and that elements are :</h4>
+<ul>
+<li dir="auto"><strong>Cables</strong> : These run through walls and ceiling to reach their destination </li>
+<li dir="auto"><strong>Patch Panel</strong> : These are used to organize the cables at the central location</li>
+<li dir="auto"><strong>Network Switch</strong> : A switch is an intermediate device that sits between the network devices that allows those devices to communicate with each other </li>
+<li dir="auto"><strong>Wireless Access Point (WAP)</strong> : A WAP lets device connects wirelessly to the network.</li>
+<li dir="auto"><strong>At least one router</strong> : A router enables the network to the outside world.  </li>
+</ul>
+<h2 data-heading="Understanding Network Protocols and Standards" dir="auto">Understanding Network Protocols and Standards</h2>
+<p dir="auto">The infrastructure of network consists of devices that confirm to well-known standards and protocols.</p>
+<ul>
+<li dir="auto">
+<h4 data-heading="Protocol" dir="auto">Protocol</h4>
+Protocol is a sequence of steps that each element of a network must follow to enable communication<br>
+Protocol also define the precise formal of all data that is exchanged in a network<br>
+The internet protocol (IP) defines the format of IP address : four eight-bit number called octets whose decimal values ranges from 0 to 255</li>
+<li dir="auto">
+<h4 data-heading="Standard" dir="auto">Standard</h4>
+Networking standards are like a <strong>universal rulebook or a common language</strong> that all electronic devices (computers, phones, smart TVs, routers, etc.) agree to use so they can understand and talk to each other.	</li>
+<li dir="auto">
+<h3 data-heading="Open System Interconnection (OSI)" dir="auto">Open System Interconnection (OSI)</h3>
+Network Standards are organized into a framework called the OSI Reference Model.<br>
+OSI reference model is a type of hierarchy for protocols so that each protocol can deal with just one part of the overall task of data communication.<br>
+It consist of seven distinct layers at which a protocol may operate
+<ul>
+<li dir="auto"><strong>Physical (layer-1)</strong> : it consist of physical components of mechanical and electrical details such as cables, connectors and network interfaces.</li>
+<li dir="auto"><strong>Data link (layer-2)</strong> : Describes the basic techniques that networks use to uniquely identify devices on the network (typically via a MAC address) and the means for one device to send information over the physical layer to another device, in the form of data packets. Switches operate at the data link layer, which means that they manage the efficient transmission of data packets from one device to another.</li>
+<li dir="auto"><strong>Network (layer-3)</strong> : Handles the routing of data across networks. Routers operate at the network layer</li>
+<li dir="auto"><strong>Transport (layer-4)</strong> : Provides for reliable delivery of packets</li>
+<li dir="auto"><strong>Session (layer-5)</strong> : Establishes sessions between network applications</li>
+<li dir="auto"><strong>Presentation (layer-6)</strong> : Converts data so that system that use different data formats can exchange information.</li>
+<li dir="auto"><strong>Application (layer-7)</strong> : Allows applications to request network services</li>
+</ul>
+</li>
+</ul>
+<h2 data-heading="Network Topology" dir="auto">Network Topology</h2>
+<p dir="auto">The term network topology refers to the shape of how the computers and other network components are connected to each other. Types of network topologies are </p>
+<ul>
+<li dir="auto"><strong>Node</strong> : A node is a device that's connected to the network and is essentially any device or point of connection within a network that is capable of sending, receiving or forwarding data. It's a fundamental building block of any network. For example : hubs , routers and modems.</li>
+<li dir="auto"><strong>Packet</strong> : A packet is a message that's sent over the network from one node to another node. The packet includes the address of the node that sent the packet, the address of the node the packet is being sent to and data.'</li>
+</ul>
+<h3 data-heading="- Bus Topology" dir="auto">- Bus Topology</h3>
+<p dir="auto">In this topology the nodes are strung together in a line<br>
+<img alt="Pasted image 20250617193059.png" src="Pasted image 20250617193059.png" class="internal-embed"><br>
+In bus topology every node on the network can see every packet that is sent on the cable. Each node looks at each packet to determine whether the packet is intended for it.<br>
+Networks that uses switches have a bus tropology<br>
+it is suitable for small networks</p>
+<h3 data-heading="- Star Topology" dir="auto">- Star Topology</h3>
+<p dir="auto">In this topology each network node is connected to a central device called a hub or switch. They are commonly used with LANs<br>
+<img alt="Pasted image 20250617193331.png" src="Pasted image 20250617193331.png" class="internal-embed"><br>
+If a cable in star topology network breaks, only the node connected to that cable is isolated from the network. The other nodes can continue to operate without interruption.<br>
+It is suitable for small networks<br>
+<mark>TECHNICAL STUFF</mark><br>
+Its important to understand the difference between a switch and a hub<br>
+When a computer is connected to a hub it sends a packet to all its port that is connected from that port<br>
+Meanwhile  In switch when a computer is connected it sends a packet to that particular computer, that wants that packet.<br>
+Only networks that use switches have a true star tropology<br>
+In a star tropology, when a switch is used, each computer sees only those packets that were sent specifically to it, as well as packets that were specifically sent to all computers on the network (those types of packets are called broadcast packets)</p>
+<h3 data-heading="- Expanding Stars" dir="auto">- Expanding Stars</h3>
+<p dir="auto">For larger network its very common that we need to create more complicated topologies that combine stars and buses.<br>
+For example a bus can be used to connect several stars. In this case two or more hubs or switches are connected to each other using a bus. Each of these hubs or switches is then the center of a star that connects two or more computers to the network. This arrangement is used in buildings that have two or more distinct workgroups. The bus that connects the switches is sometimes called a backbone<br>
+Another way to expand a star tropology is to use a technique called daisy-chaining. In this chaining, a switch is connected to another switch as if it were one of the nodes on the star. Then this second switch serves as the center of a second star.</p>
+<h3 data-heading="- Ring Tropology" dir="auto">- Ring Tropology</h3>
+<p dir="auto">It is a third type of network tropology.<br>
+<img alt="Pasted image 20250617195909.png" src="Pasted image 20250617195909.png" class="internal-embed"><br>
+In ring tropology packets are send around the circle from computers to computer. Each computer looks at each packet whether it is needed or not. If not, the packet is passed on to the next computer in the ring.<br>
+Two popular networking technologies used rings that are<br>
+ARCNET &amp; Token ring<br>
+ARCNET is still used for certain applications such as factory automation, but its rarely used in business network.<br>
+Token Ring is still a popular network technology for IBM midrange computers.</p>
+<h3 data-heading="- Mesh Topology" dir="auto">- Mesh Topology</h3>
+<p dir="auto">Fourth type of network topology known as mesh<br>
+<img alt="Pasted image 20250617200250.png" src="Pasted image 20250617200250.png" class="internal-embed"><br>
+It has multiple connections between each of the nodes on the network.<br>
+The advantage of a mesh topology is that if one cable breaks the network can use an alternative route to deliver its packets<br>
+It is often used to link switches in a LAN<br>
+It is also very common for metropolitan or WANs</p>
+<h2 data-heading="Considering Cable" dir="auto">Considering Cable</h2>
+<p dir="auto">Network Cable is the most important components of layer 1 in OSI Reference Model.</p>
+<ul>
+<li dir="auto">
+<h4 data-heading="Twisted-Pair Cable" dir="auto">Twisted-Pair Cable</h4>
+We call this cable as twisted pair because inside the outer sheath of the cable are four pairs of small insulated wire. These pairs are color coded : blue, green , orange and brown.<br>
+The Two wires that make up each pair are twisted together in a way that prevents the electrical signals within each pair from interfering with the other pairs<br>
+Examples of twisted-pair cable are Cat-5e (data speed is about 1gpbs and the length of the cable is 100 meters) and Cat-6 (data speed is about 10gbps and the length of the cable is 55 meters)<br>
+They are also used to connect telephone lines with the router or the cable that we connect with printer is also a twisted-pair cable</li>
+<li dir="auto">
+<h4 data-heading="RJ-45 Connectors" dir="auto">RJ-45 Connectors</h4>
+Twisted-pair cable is attached to network devices using a special type of connector called an RJ-45. For the cable to meet the Cat-5e standards, the twists of the individual pairs must be maintained all the way up to the RJ-45 connector<br>
+<img alt="Pasted image 20250617212537.png" src="Pasted image 20250617212537.png" class="internal-embed"><br>
+So the big one where the cable will get insert is female connector and the cable that will go inside is the male connector.</li>
+<li dir="auto">
+<h4 data-heading="Patch panels &amp; Patch cables" dir="auto">Patch panels &amp; Patch cables</h4>
+A <strong>patch panel</strong> is like a <strong>centralized sorting station or a hub of wall jacks</strong> for all the permanent network cables running throughout a building. Instead of having long cables directly connecting every computer to a router or switch, they all come to the patch panel. Then, short <strong>patch cables</strong> are used to make flexible connections between these permanent cables and the actual networking equipment (like switches), making the whole network much tidier, easier to manage, and simpler to troubleshoot.</li>
+<li dir="auto">
+<h4 data-heading="Repeaters &amp; Hubs" dir="auto">Repeaters &amp; Hubs</h4>
+A repeater is a layer-1 device that is designed to overcome the max length limitation of twisted-pair network cables.<br>
+It contains two RJ-45 Ports<br>
+A repeater is connected internally by an amplifier. Electrical signals received on either of the two ports are boosted by the amplifier and sent through the other port.<br>
+A hub is a repeater with more than two ports. For example, a hub may have four or eight ports. These ports can each connect to another device on the network such as a client computer, a server, or a printer. A port on a hub can also connect to another hub, so that (for example) an eight port hub can connect to seven computers and another eight-port hub, which can connect to seven more computers. In this way, two eight-port hubs can connect 14 computers to each other.<br>
+The second most important thing to know about hubs is that an electrical signal received on any of the hub’s ports is amplified and repeated on all the other ports in the hub. So, in an eight-port hub, any electrical signals received on port 1 are amplified and then sent out on ports 2 through 8. Any devices that are connected to ports 2 through 8 see the signals that were received on port 1. The same is true for signals received on any of the other ports; for example, any signals received on port 4 will be amplified and repeated on ports 1 through 3 as well as ports 5 through 8.</li>
+<li dir="auto">
+<h4 data-heading="Switches" dir="auto">Switches</h4>
+A switch is a layer-2 device that is similar to a hub in that it allows you to connect more than one device, and packets received on one port are relayed to other ports.</li>
+</ul>
+<h2 data-heading="Pursuing Ports, Interfaces and MAC Addresses" dir="auto">Pursuing Ports, Interfaces and MAC Addresses</h2>
+<p dir="auto">Every network interface must have a unique identifier called a MAC address (MAC stands for media access control)<br>
+MAC addresses are important because they provide the means for a network to keep track of the devices that make up the network. Without MAC addresses, it would be impossible to know what devices are on the network. And it would be impossible to send information to a particular device or to know which particular device sent information.<br>
+Physical address == MAC address</p>
+<p dir="auto">MAC addresses are of 48-bits in length.<br>
+This is how a MAC address looks like<br>
+E8-9E-B4-49-43-E5<br>
+<mark>TIP</mark> : **A MAC address is connected with the motherboard so the MAC address will never be changed but if a computer has separate NIC then the MAC address is a part of the card not the computer. So if we remove the NIC from one computer and install it in another the MAC address of the another card will be same as before we can say that MAC address travels with the card </p>
+<h2 data-heading="Pondering Packets" dir="auto">Pondering Packets</h2>
+<p dir="auto">When two or more devices connected to a network via cables they exchange information via packets which are relatively small units of data that are sent and received through the network interface and cables. A network packet always originates at a single network interface, called the sender and it's usually sent to a single network interface called destination.<br>
+<mark>TECHNICAL STUFFS</mark><br>
+The term frame is often used instead of packet, but technically they’re not quite the same. Every packet begins with a preamble, which consists of 56 bits of alternating zeros and ones. This preamble is used by the electronic circuitry of the interfaces to get their clocks synchronized properly so they can accurately read the rest of the packet. It’s the rest of the packet that is technically called the frame. In other words, a packet consists of a preamble followed by a frame. Because the preamble is of concern only to the electronic engineers that design network interfaces, most non engineers use the terms packet and frame interchangeably.<br>
+Ethernet has a standard packet format that all packets sent on an ethernet must follow. An Ethernet packets contains the following information </p>
+<ul>
+<li dir="auto"><strong>Preamble</strong>: The preamble consists of 56 bits of alternating ones and zeros and is used to synchronize the precise timing required to read packet data.</li>
+<li dir="auto"><strong>Start-of-frame marker</strong>: A start-of-frame marker is a single byte that indicates that the frame is about to begin.</li>
+<li dir="auto"><strong>Destination MAC address (six bytes).</strong></li>
+<li dir="auto"><strong>Sender MAC address (six bytes).</strong></li>
+<li dir="auto"><strong>Tag</strong>: The tag, which is used to support virtual local area networks (VLANs), is optional. A VLAN lets you divide two or more distinct LANs on a shared physical infrastructure.</li>
+<li dir="auto"><strong>Ethertype</strong> <strong>(two bytes)</strong>: This field indicates the specific protocol that is contained in the payload.</li>
+<li dir="auto"><strong>Payload</strong>: The payload contains the actual data being sent by the packet. The payload can be anywhere from 46 to 1,500 bytes. If the information that needs to be sent is longer than 1,500 bytes, the information must be broken into two or more packets, sent separately, and then reassembled when the packets reach their destination. (The tasks of breaking up and reassembling the data are handled by protocols at higher layers in the OSI framework; Ethernet itself has no understanding of what is in the packets it sends.)</li>
+<li dir="auto"><strong>Frame check sequence (four bytes)</strong> : The frame check sequence (FCS) is used to ensure that the frame data was sent correctly. Basically, the interface that sends the packet uses an algorithm to calculate a four-byte number based on the contents of the frame and saves this number in the FCS field. When the packet is received, the receiving interface repeats the calculation, and then makes sure that the number recorded in the FCS portion of the packet matches the number it calculated. If the numbers disagree, the packet got garbled in transmission and is discarded.<br>
+<strong>MAIN POINTS TO REMEMBER</strong> : </li>
+<li dir="auto">Ethernet packets contain the MAC addresses of the sender and the receiver.</li>
+<li dir="auto">The payload of an Ethernet packet is almost always a packet created by another higher-level protocol such as IP.</li>
+<li dir="auto">Ethernet packets can contain a tag field used to implement VLANs, which provide an important means of organizing a large network into smaller parts that can be more easily managed.</li>
+</ul>
+<h2 data-heading="Dealing with Broadcast Packets" dir="auto">Dealing with Broadcast Packets</h2>
+<p dir="auto">Some packets called Broadcast packets are intended to be received by every device on the network. Example of a broadcast Packet is FF-FF-FF-FF-FF-FF----<br>
+The interfaces will receive this packet inspect the destination and will send the packet up to the next higher protocol.<br>
+One of the most common users of broadcast packets is Dynamic Host configuration Protocol (DHCP) which allows computer that join a network to be assigned an IP address.<br>
+When an interface card is connected to a network it send a broadcast msg. Every device on that network will see that msg but only THE DHCP will response</p>
+    </body>
+</html>
